@@ -10,10 +10,9 @@ class SearchUpdateTest {
     fun `when search is empty, then search is in its initial state`() {
         val searchUpdate = SearchUpdate()
         val spec = UpdateSpec(searchUpdate)
-        val model = SearchModel("as")
-        val initialModel = model.initialState()
+        val initialModel = InitialSearchModel()
 
-        spec.given(model)
+        spec.given(initialModel)
             .whenEvent( TextChanged(""))
             .then(assertThatNext(hasModel(initialModel)))
     }

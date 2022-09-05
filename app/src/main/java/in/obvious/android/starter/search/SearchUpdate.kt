@@ -7,7 +7,7 @@ import com.spotify.mobius.Update
 class SearchUpdate : Update<SearchModel, SearchEvent, Any> {
   override fun update(model: SearchModel, event: SearchEvent): Next<SearchModel, Any> {
       return when(event) {
-          is TextChanged -> next(model.initialState())
+          is TextChanged -> next(InitialSearchModel())
       }
   }
 }
