@@ -32,6 +32,30 @@ class SearchUpdateTest {
         .then(
             assertThatNext(
                 hasModel(initialModel.searching(query = "craft")),
-                hasEffects(SearchQueryEffect("craft"))))
+                hasEffects(SearchQueryEffect("craft"))
+            )
+        )
   }
+
+    @Test
+    fun `when search is successful, then search is in success state`() {
+        val query = "craft"
+        val results = listOf("result1", "result2")
+        val successModel = SearchModel()
+            .initial()
+            .searching(query = query)
+            .searchSuccess(results = results)
+
+        spec
+            .given(successModel)
+            .whenEvents(
+                TextChanged(query = query),
+                SearchSuccessful(results = results)
+            )
+            .then(
+                assertThatNext(
+                    hasModel(successModel.searchSuccess(results = results))
+                )
+            )
+    }
 }
