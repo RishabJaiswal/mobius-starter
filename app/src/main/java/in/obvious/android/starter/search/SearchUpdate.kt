@@ -14,10 +14,17 @@ class SearchUpdate : Update<SearchModel, SearchEvent, SearchEffect> {
 
   override fun update(model: SearchModel, event: SearchEvent): Next<SearchModel, SearchEffect> {
     return when (event) {
-      is TextChanged -> search(model = model, query = event.query)
+      is TextChanged -> search(
+          model = model,
+          query = event.query
+      )
       is SearchSuccessful -> next(
           model.searchSuccess(results = event.results),
           setOf(SearchSuccessEffect(results = event.results))
+      )
+      is SearchFailed -> next(
+          model.searchFailed(error = event.error),
+          setOf(SearchFailedEffect(error = event.error))
       )
     }
   }

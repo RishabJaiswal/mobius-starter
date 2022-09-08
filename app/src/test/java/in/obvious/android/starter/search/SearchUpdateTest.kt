@@ -5,6 +5,7 @@ import com.spotify.mobius.test.NextMatchers.hasModel
 import com.spotify.mobius.test.UpdateSpec
 import com.spotify.mobius.test.UpdateSpec.assertThatNext
 import org.junit.Test
+import java.lang.NullPointerException
 
 class SearchUpdateTest {
 
@@ -41,22 +42,45 @@ class SearchUpdateTest {
     fun `when search is successful, then search is in success state & emits success effect`() {
         val query = "craft"
         val results = listOf("result1", "result2")
-        val successModel = SearchModel()
-            .initial()
-            .searching(query = query)
-            .searchSuccess(results = results)
+        val successModel = SearchModel(
+            query = query,
+            result = SearchSuccess(results = results)
+        )
 
         spec
-            .given(successModel)
+            .given(SearchModel().initial())
             .whenEvents(
                 TextChanged(query = query),
                 SearchSuccessful(results = results)
             )
             .then(
                 assertThatNext(
-                    hasModel(successModel.searchSuccess(results = results)),
+                    hasModel(successModel),
                     hasEffects(SearchSuccessEffect(results = results))
                 )
             )
     }
+
+  @Test
+  fun `when search failed, then search is in error state & emits error effect`() {
+    val query = "craft"
+    val error = NullPointerException()
+    val errorModel = SearchModel(
+        query = query,
+        result = SearchError(error = error)
+    )
+
+    spec
+        .given(SearchModel().initial())
+        .whenEvents(
+            TextChanged(query = query),
+            SearchFailed(error = error)
+        )
+        .then(
+            assertThatNext(
+                hasModel(errorModel),
+                hasEffects(SearchFailedEffect(error = error))
+            )
+        )
+  }
 }
