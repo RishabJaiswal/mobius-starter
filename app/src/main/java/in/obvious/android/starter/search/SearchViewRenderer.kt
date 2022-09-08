@@ -1,5 +1,7 @@
 package `in`.obvious.android.starter.search
 
+import java.lang.Exception
+
 class SearchViewRenderer(private val view: SearchView) {
 
   private fun renderNoSearch() {
@@ -26,12 +28,26 @@ class SearchViewRenderer(private val view: SearchView) {
     }
   }
 
+  private fun renderSearchError(error: Exception) {
+    view.apply {
+      hideLoader()
+      hideResults()
+      showError(
+        message = getErrorMessage(error = error)
+      )
+    }
+  }
+
+  private fun getErrorMessage(error: Exception): String {
+    return "Error message"
+  }
+
   fun render(model: SearchModel) {
     when (model.result) {
       is NoSearch -> renderNoSearch()
       Searching -> renderSearching(query = model.query)
       is SearchSuccess -> renderSearchSuccess(results = model.result.results)
-      is SearchError -> TODO()
+      is SearchError -> renderSearchError(error = model.result.error)
     }
   }
 }

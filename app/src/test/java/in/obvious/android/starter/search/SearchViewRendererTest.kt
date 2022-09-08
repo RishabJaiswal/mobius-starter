@@ -4,6 +4,7 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
+import java.lang.NullPointerException
 
 class SearchViewRendererTest {
 
@@ -56,6 +57,23 @@ class SearchViewRendererTest {
     verify(searchView).hideLoader()
     verify(searchView).hideError()
     verify(searchView).showResults(results =  results)
+    verifyNoMoreInteractions(searchView)
+
+  }
+
+  @Test
+  fun `when search fails, then hide loader & results and show error message`() {
+    // given
+    val error = NullPointerException()
+    val errorModel = SearchModel().searchFailed(error = error)
+
+    // when
+    viewRenderer.render(errorModel)
+
+    // then
+    verify(searchView).hideLoader()
+    verify(searchView).hideResults()
+    verify(searchView).showError(message = "Error message")
     verifyNoMoreInteractions(searchView)
 
   }
