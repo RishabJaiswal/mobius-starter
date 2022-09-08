@@ -10,6 +10,14 @@ class SearchViewRenderer(private val view: SearchView) {
     }
   }
 
+  private fun renderSearching(query: String) {
+    view.apply {
+      showLoader(query = query)
+      hideError()
+      hideResults()
+    }
+  }
+
   private fun renderSearchSuccess() {
     view.apply {
       hideLoader()
@@ -21,9 +29,9 @@ class SearchViewRenderer(private val view: SearchView) {
   fun render(model: SearchModel) {
     when (model.result) {
       is NoSearch -> renderNoSearch()
+      Searching -> renderSearching(query = model.query)
       is SearchSuccess -> renderSearchSuccess()
       is SearchError -> TODO()
-      Searching -> TODO()
     }
   }
 }

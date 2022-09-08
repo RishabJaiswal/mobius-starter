@@ -27,6 +27,23 @@ class SearchViewRendererTest {
   }
 
   @Test
+  fun `when search is in progress, then show loader and hide results and error`() {
+    // given
+    val query = "Craft"
+    val searchingModel = SearchModel().searching(query = query)
+
+    // when
+    viewRenderer.render(searchingModel)
+
+    // then
+    verify(searchView).showLoader(query = query)
+    verify(searchView).hideError()
+    verify(searchView).hideResults()
+    verifyNoMoreInteractions(searchView)
+
+  }
+
+  @Test
   fun `when search is successful, then hide loader & error and show results`() {
     // given
     val results = listOf("result1", "result2")
