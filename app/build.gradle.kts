@@ -53,4 +53,5 @@ dependencies {
   testImplementation(libs.mobius.test)
 
   testImplementation(libs.truth)
+  testImplementation( libs.mockito.kotlin)
 }
