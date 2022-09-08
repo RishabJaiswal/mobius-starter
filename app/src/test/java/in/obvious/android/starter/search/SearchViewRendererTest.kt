@@ -25,4 +25,21 @@ class SearchViewRendererTest {
     verifyNoMoreInteractions(searchView)
 
   }
+
+  @Test
+  fun `when search is successful, then hide loader & error and show results`() {
+    // given
+    val results = listOf("result1", "result2")
+    val successModel = SearchModel().searchSuccess(results = results)
+
+    // when
+    viewRenderer.render(successModel)
+
+    // then
+    verify(searchView).hideLoader()
+    verify(searchView).hideError()
+    verify(searchView).showResults()
+    verifyNoMoreInteractions(searchView)
+
+  }
 }
