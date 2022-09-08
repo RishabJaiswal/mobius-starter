@@ -8,8 +8,8 @@ import java.lang.NullPointerException
 
 class SearchViewRendererTest {
 
-  private val searchView = mock<SearchView>()
-  private val viewRenderer = SearchViewRenderer(view = searchView)
+  private val searchUI = mock<SearchUI>()
+  private val uiRenderer = SearchUIRenderer(ui = searchUI)
 
   @Test
   fun `when search query is empty, then hide loader, results & error`() {
@@ -17,13 +17,13 @@ class SearchViewRendererTest {
     val initialModel = SearchModel().initial()
 
     // when
-    viewRenderer.render(initialModel)
+    uiRenderer.render(initialModel)
 
     // then
-    verify(searchView).hideLoader()
-    verify(searchView).hideResults()
-    verify(searchView).hideError()
-    verifyNoMoreInteractions(searchView)
+    verify(searchUI).hideLoader()
+    verify(searchUI).hideResults()
+    verify(searchUI).hideError()
+    verifyNoMoreInteractions(searchUI)
 
   }
 
@@ -34,13 +34,13 @@ class SearchViewRendererTest {
     val searchingModel = SearchModel().searching(query = query)
 
     // when
-    viewRenderer.render(searchingModel)
+    uiRenderer.render(searchingModel)
 
     // then
-    verify(searchView).showLoader(query = query)
-    verify(searchView).hideError()
-    verify(searchView).hideResults()
-    verifyNoMoreInteractions(searchView)
+    verify(searchUI).showLoader(query = query)
+    verify(searchUI).hideError()
+    verify(searchUI).hideResults()
+    verifyNoMoreInteractions(searchUI)
 
   }
 
@@ -51,13 +51,13 @@ class SearchViewRendererTest {
     val successModel = SearchModel().searchSuccess(results = results)
 
     // when
-    viewRenderer.render(successModel)
+    uiRenderer.render(successModel)
 
     // then
-    verify(searchView).hideLoader()
-    verify(searchView).hideError()
-    verify(searchView).showResults(results =  results)
-    verifyNoMoreInteractions(searchView)
+    verify(searchUI).hideLoader()
+    verify(searchUI).hideError()
+    verify(searchUI).showResults(results =  results)
+    verifyNoMoreInteractions(searchUI)
 
   }
 
@@ -68,13 +68,13 @@ class SearchViewRendererTest {
     val errorModel = SearchModel().searchFailed(error = error)
 
     // when
-    viewRenderer.render(errorModel)
+    uiRenderer.render(errorModel)
 
     // then
-    verify(searchView).hideLoader()
-    verify(searchView).hideResults()
-    verify(searchView).showError(message = "Error message")
-    verifyNoMoreInteractions(searchView)
+    verify(searchUI).hideLoader()
+    verify(searchUI).hideResults()
+    verify(searchUI).showError(message = "Error message")
+    verifyNoMoreInteractions(searchUI)
 
   }
 }

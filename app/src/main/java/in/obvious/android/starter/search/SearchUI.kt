@@ -1,6 +1,6 @@
 package `in`.obvious.android.starter.search
 
-interface SearchView {
+interface SearchUI {
   fun hideLoader()
   fun hideError()
   fun hideResults()

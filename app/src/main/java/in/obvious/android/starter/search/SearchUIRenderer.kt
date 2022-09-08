@@ -2,10 +2,10 @@ package `in`.obvious.android.starter.search
 
 import java.lang.Exception
 
-class SearchViewRenderer(private val view: SearchView) {
+class SearchUIRenderer(private val ui: SearchUI) {
 
   private fun renderNoSearch() {
-    view.apply {
+    ui.apply {
       hideLoader()
       hideResults()
       hideError()
@@ -13,7 +13,7 @@ class SearchViewRenderer(private val view: SearchView) {
   }
 
   private fun renderSearching(query: String) {
-    view.apply {
+    ui.apply {
       showLoader(query = query)
       hideError()
       hideResults()
@@ -21,7 +21,7 @@ class SearchViewRenderer(private val view: SearchView) {
   }
 
   private fun renderSearchSuccess(results: List<String>) {
-    view.apply {
+    ui.apply {
       hideLoader()
       hideError()
       showResults(results = results)
@@ -29,7 +29,7 @@ class SearchViewRenderer(private val view: SearchView) {
   }
 
   private fun renderSearchError(error: Exception) {
-    view.apply {
+    ui.apply {
       hideLoader()
       hideResults()
       showError(
