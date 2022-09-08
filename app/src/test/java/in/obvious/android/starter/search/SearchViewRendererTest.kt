@@ -55,7 +55,7 @@ class SearchViewRendererTest {
     // then
     verify(searchView).hideLoader()
     verify(searchView).hideError()
-    verify(searchView).showResults()
+    verify(searchView).showResults(results =  results)
     verifyNoMoreInteractions(searchView)
 
   }

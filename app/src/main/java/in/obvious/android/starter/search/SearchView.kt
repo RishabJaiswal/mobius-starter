@@ -5,5 +5,5 @@ interface SearchView {
   fun hideError()
   fun hideResults()
   fun showLoader(query: String)
-  fun showResults()
+  fun showResults(results: List<String>)
 }
