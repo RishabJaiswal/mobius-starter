@@ -39,16 +39,29 @@
         app:layout_constraintTop_toTopOf="@id/counterLabel" />
 
     <Button
-        android:id="@+id/startCountdown"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
-        android:text="Start Countdown"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+      android:id="@+id/startCountdown"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginEnd="32dp"
+      android:layout_marginBottom="24dp"
+      android:text="Start Countdown"
+      android:textSize="28sp"
+      app:layout_constraintBottom_toTopOf="@+id/search_button"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="1.0"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+      android:id="@+id/search_button"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="56dp"
+      android:layout_marginBottom="16dp"
+      android:text="Search"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="@+id/startCountdown"
+      app:layout_constraintStart_toStartOf="@+id/startCountdown"
+      app:layout_constraintTop_toTopOf="@+id/startCountdown" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

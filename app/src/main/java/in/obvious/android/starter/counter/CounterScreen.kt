@@ -12,6 +12,8 @@ import com.spotify.mobius.android.MobiusAndroid
 import com.spotify.mobius.functions.Consumer
 import `in`.obvious.android.starter.databinding.ScreenCounterBinding
 import `in`.obvious.android.starter.mobius.MainThreadUiWorkRunner
+import `in`.obvious.android.starter.search.SearchActivity
+import android.content.Intent
 
 class CounterScreen : Fragment() {
 
@@ -93,6 +95,7 @@ class CounterScreen : Fragment() {
     binding.incrementCounter.setOnClickListener { events.accept(IncrementClicked) }
     binding.decrementCounter.setOnClickListener { events.accept(DecrementClicked) }
     binding.startCountdown.setOnClickListener { events.accept(StartCountdownClicked) }
+    binding.searchButton.setOnClickListener { startActivity(Intent(context, SearchActivity::class.java)) }
   }
 
   private fun disposeEvents() {
