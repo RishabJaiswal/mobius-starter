@@ -6,7 +6,7 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import java.lang.NullPointerException
 
-class SearchViewRendererTest {
+class SearchUIRendererTest {
 
   private val searchUI = mock<SearchUI>()
   private val uiRenderer = SearchUIRenderer(ui = searchUI)
